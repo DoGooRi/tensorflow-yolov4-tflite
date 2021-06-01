@@ -1,6 +1,8 @@
 checkpoints/*
 core/*
-data/*
+data/dataset/*
+data/classes/*
+data/anchors/*
 result.png
 .DS_Store
 __pycache__
