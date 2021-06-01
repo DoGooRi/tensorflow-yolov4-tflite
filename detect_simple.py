@@ -1,8 +1,10 @@
 import tensorflow as tf
 import core.utils as utils
 from tensorflow.python.saved_model import tag_constants
+from PIL import Image
 import cv2
 import numpy as np
+
 
 MODEL_PATH = './checkpoints/yolov4-416'
 IOU_THRESHOLD = 0.45
@@ -40,10 +42,11 @@ def main(img_path):
 
     pred_bbox = [boxes.numpy(), scores.numpy(), classes.numpy(), valid_detections.numpy()]
     result = utils.draw_bbox(img, pred_bbox)
-
+    result = Image.fromarray(result.astype(np.uint8))
+    result.show()
     result = cv2.cvtColor(np.array(result), cv2.COLOR_RGB2BGR)
     cv2.imwrite('result.png', result)
 
 if __name__ == '__main__':
-    img_path = './data/kite.jpg'
+    img_path = './data/parking.jpg'
     main(img_path)
